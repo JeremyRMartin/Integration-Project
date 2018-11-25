@@ -8,6 +8,6 @@ import java.util.Scanner;
  */
 public class Utility {
 
-  public final static Scanner scanner = new Scanner(System.in);
+  public static Scanner scanner = new Scanner(System.in);
   //Final Means it is immutable (it can't be changed)
 }

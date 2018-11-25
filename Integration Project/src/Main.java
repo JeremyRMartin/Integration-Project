@@ -1,36 +1,41 @@
 import Storyline.Credits;
 import Storyline.Intro;
-import Storyline.chapter1;
+import characters.Narrator;
+import characters.Person;
+import characters.Player;
+import Storyline.Chapter1;
+import tools.RequestResponse;
 import tools.Utility;
-import tools.playerStats;
-
-/*
- * Jeremy Martin
- * 
- * Project Description:
- *
- * My project will be a simple game involving choices and a story line. AKA a text based rpg, with a
- * decision based story line.
- */
 
 public class Main {
 
   public static void main(String[] args) throws InterruptedException {
-    playerStats.setLiving(true);
+    // POLYMOPRHISM
+    // MainPlayer is a new Player being created of type Person.
+    Person mainPlayer = new Player(100.0, true);
+    Person mysteryLady = new Person("Mysterious Figure");
+    Person console = new Narrator();
     boolean invalidInput = true;
-    String menuSelection = Intro.printIntro(); // returns yesnomore
+    String menuSelection = Intro.printIntro(mainPlayer, mysteryLady, console); // returns "yes, no,
+                                                                               // how to play"
     while (invalidInput) {
       switch (menuSelection.toUpperCase()) {
         case "YES":
-          chapter1.section1();
+          mainPlayer.speak("Sure.");
+          Chapter1.section1(mainPlayer, mysteryLady, console);
           invalidInput = false;
           break;
         case "NO":
+          mainPlayer.speak("Nah, I'm good.");
           Credits.rollFalseCredits();
-          invalidInput = false;
+          System.out.println();
+          System.out.println();
+          System.out.println();
+          mysteryLady.speak("Done Messing Around?");
+          menuSelection = RequestResponse.yesNo();
           break;
-        case "MORE INFO":
-          menuSelection = Intro.moreInfo();
+        case "HOW TO PLAY":
+          menuSelection = Intro.HowToPlay();
           break;
         default:
           System.out.println("PLEASE ENTER A CORRECT OPTION");

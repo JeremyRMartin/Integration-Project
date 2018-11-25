@@ -6,8 +6,8 @@ public class ageGen {
  
   public static int randomAge() {
     Random rnd = new Random();
-    int low = 120;
-    int high = 1000;
+    int low = 3000;
+    int high = 4000;
     int result = rnd.nextInt(high-low) + low;
     return result;
   }
